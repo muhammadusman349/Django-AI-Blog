@@ -7,7 +7,7 @@ class BlogPost(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     youtude_title = models.CharField(max_length=300)
     youtube_link = models.URLField
-    body = models.TextField()
+    generated_content  = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
