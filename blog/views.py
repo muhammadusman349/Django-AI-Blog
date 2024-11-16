@@ -18,6 +18,7 @@ load_dotenv()
 def index(request):
     return render(request, 'index.html')
 
+
 @csrf_exempt
 def generate_blog(request):
     if request.method == 'POST':
