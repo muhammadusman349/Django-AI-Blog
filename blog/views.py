@@ -26,12 +26,13 @@ def generate_blog(request):
             data = json.loads(request.body)
             yt_link = data['link']
         except (KeyError, json.JSONDecodeError):
-            return JsonResponse({'error': 'Invalid Request'}, status=400)
+            return JsonResponse({'error': 'Invalid data sent'}, status=400)
         # get yt title
         title = yt_title(yt_link)
-        # get transcription:
+        # get transcript
         transcription = get_transcription(yt_link)
-
+        if not transcription:
+            return JsonResponse({'error': " Failed to get transcript"}, status=500)
         # use OpenAI to generate the blog
         blog_content = generate_blog_from_transcription(transcription)
         if not blog_content:
